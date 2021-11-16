@@ -9,4 +9,4 @@ Below are the steps which is to be followed in order to run Hotel Management Usi
 7. Be sure to save both csv files saved in the exact same location as this py file. Or else edit my code and type down exact same location to wherever the csv files are being used.
 8. After doing all of the above steps, you will be able to run the program without any error.
 
-P.S - The headings in the 2 csv files should be given beforehand, and manually, in order to keep your data organised and understandable to every one.
+P.S - The headings in the 2 csv files should be given beforehand, and manually, in order to keep your data organised and understandable to every one. Headings are same as that from tables booking and service made in MySQL, in exact same order.
