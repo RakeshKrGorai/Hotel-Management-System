@@ -1,3 +1,3 @@
-The program is a basic Hotel Management System program.
+### Hotel Management System
 
-It's completely based on concepts related to File Handling and MySQL. 
+This is a basic hotel  Management System project which uses the concepts of MySQL and File Handling. It stores the data in sql tables and csv files.
