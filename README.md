@@ -5,8 +5,8 @@ This is a basic hotel  Management System project which uses the concepts of MySQ
 
 Below are the steps which is to be followed in order to run Hotel Management Using File Handling+ MySQL.py:
 
-1. You need to have python 3 installed in your device. Can be easily downloaded from python.org .
-2. You need to have MySQL installed in your device. Can be easily installed from mysql.org .
+1. You need to have python 3 installed in your device. Can be easily downloaded from [here](https://www.python.org/downloads/) .
+2. You need to have MySQL installed in your device. Can be easily installed from [here](mysql.org) .
 3. Install mysql-connector-python from the command prompt using command : "pip install mysql-connector-python".
 4. In MySQL, create a database "hotel" .
 5. Inside that database, create two tables namely "booking" and "service". The Table Structure will be attached in the repository in picture format.
