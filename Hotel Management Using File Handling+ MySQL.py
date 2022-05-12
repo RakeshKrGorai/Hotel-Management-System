@@ -70,7 +70,6 @@ def Home():
 #BOOKING FUNCTION
 
 def booking():
-        global r
         days=0
         openfile=open(hotel_database,'a')
         fw=open('services.csv','a')
