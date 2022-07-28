@@ -11,11 +11,32 @@ This is a basic Hotel  Management System Project which uses the concepts of MySQ
 ```
 pip install mysql-connector-python
 ```
-- In MySQL, create a database named `hotel` .
-- Inside that database, create two tables namely `booking` and `service`. The table structures are attached in the repository as images.
-- Create 2 csv files to be named as `hotel.csv` and `services.csv` .
-- Be sure to save both csv files saved in the exact same location as this project file. Or else edit my code and type down exact same location to wherever the csv files are being used.
-- Enjoy ;)
-<hr>
+- In MySQL, create a database named `hotel` . Now select that database to use. 
+- Inside that database, create two tables namely `booking` and `service`. Use the syntax given below to create tables.
+For table booking:
+```
+create table booking(
+    Name Varchar(20),
+    Phone_Number varchar(10),
+    Email varchar(15),
+    Check_In date,
+    Check_Out date,
+    Room_Type varchar(15),
+    Price int,
+    Room_Number int,
+    Customer_id int,
+    Payment varchar(3) default "No",
+    Days int);
+```
+For table service:
+```
+create table service(
+    Name varchar(20),
+    Customer_id int,
+    Service_Charge int default 0,
+    Room_Bill int);
+```
+- Clone this repository (Download this repository).
+- Now run "Hotel Management System.py". It should be working well.
 
-<b>P.S</b> - The headings in the 2 csv files should be given beforehand, and manually, in order to keep your data organised and understandable to every one. Headings are same as that from tables booking and service made in MySQL, in exact same order.
+<hr>
