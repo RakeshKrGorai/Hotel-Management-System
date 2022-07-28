@@ -13,6 +13,7 @@ pip install mysql-connector-python
 ```
 - In MySQL, create a database named `hotel` . Now select that database to use. 
 - Inside that database, create two tables namely `booking` and `service`. Use the syntax given below to create tables.
+
 For table booking:
 ```
 create table booking(
