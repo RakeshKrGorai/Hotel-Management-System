@@ -1,28 +1,25 @@
 #Project For Hotel Management System Using Python,File Handling and SQL Database
 
 #Importing Required Modules
-
 import csv
 import random
 import os 
 import mysql.connector as c
-con=c.connect(host='localhost',user='root',passwd='mysql',database='hotel')
+con=c.connect(host='localhost',user='root',passwd='mysql',database='hotel')     #To connect to MySQL via Python
 cursor=con.cursor()
-cursor.execute("use hotel")
+cursor.execute("use hotel")     #Selecting Database where table is created.
 
 #Defining Global Variables
-
 hotel_database="hotel.csv"
-name=phno=add=checkin=checkout=room=price=rc=p=roomno=custid=day=[]
+name=phno=add=checkin=checkout=room=price=rc=p=roomno=customer_Id=day=[]
 hotel=[]
 services=[]
 fields=['Name','Phone No','Email','Check-In','Check-Out','Room Type','Price','Room Number',"Customer Id","Days"]
 i=0
 days=0
-r=""
+room_type=""
 
 #Home Function
-
 def Home():
     print("--------------------------------------------------")
     print("GREETINGS!\n")
@@ -37,29 +34,29 @@ def Home():
     print("\t\t\t 7 Contact Us\n")
     print("\t\t\t 0 Exit\n")
     print("--------------------------------------------------")
-    ch=int(input("What Would You Like To Do? Enter Your Choice :"))
-    if ch == 1:
+    choice=int(input("What Would You Like To Do? Enter Your Choice :"))
+    if choice == 1:
         print(" ")
         booking()
-    elif ch == 2:
+    elif choice == 2:
         print(" ")
         info_rooms()
-    elif ch == 3:
+    elif choice == 3:
         print(" ")
         restaurant()
-    elif ch == 4:
+    elif choice == 4:
         print(" ")
         payment()
-    elif ch == 5:
+    elif choice == 5:
         print(" ")
         search_record()
-    elif ch == 6:
+    elif choice == 6:
         print(" ")
         delete_record()
-    elif ch==7:
+    elif choice==7:
         print(" ")
         contact()
-    elif ch==0:
+    elif choice==0:
         print(" ")
         exit()
     else:
@@ -103,7 +100,6 @@ def booking():
                     break
         checkindate=input("Check-In Date(YYYY-MM-DD) :")
         #copy of data for file management
-	
         indate=checkindate
         checkin.append(checkindate)
         checkindate=checkindate.split('-')
@@ -137,7 +133,7 @@ def booking():
                 checkout.pop(i)
                 booking()
         else:
-                m = {
+                month = {
                         1:31,
                         2:28,
                         3:31,
@@ -155,14 +151,14 @@ def booking():
 		
                 #Checking Right Credentials
 		
-                if (0<ci[1]<13 and 0<co[1]<13 and ci[2]<=m[ci[1]] and co[2]<=m[co[1]]):
+                if (0<ci[1]<13 and 0<co[1]<13 and ci[2]<=month[ci[1]] and co[2]<=month[co[1]]):
                     #if month are same
                     if(ci[1]==co[1]):
                         days=co[2]-ci[2]
                     else:
                         for i in range(ci[1],co[1]):
-                            #print(m[i])
-                            days+=(m[ci[1]]-ci[2])+co[2]
+                            #print(month[i])
+                            days+=(month[ci[1]]-ci[2])+co[2]
                     print('Booking for ',days+1,'days')
                 else:
                     print('Wrong Value')
@@ -172,46 +168,45 @@ def booking():
         print(" 3. Suites")
         print(" 4. Cottages")
         print(("\t\tPress 0 for Room Prices"))
-        ch=int(input("->"))
+        choice=int(input("->"))
 		
         # if-conditions to display alloted room type and it's price
-        #r=""
-        if ch==0:
+        if choice==0:
             print(" 1. Standard- Rs. 4000")
             print(" 2. Standard Plus - Rs. 4500")
             print(" 3. Suites - Rs. 5000")
             print(" 4. Cottages- Rs. 5500")
-            ch=int(input("->"))
-        elif ch==1:
+            choice=int(input("->"))
+        elif choice==1:
             room.append('Standard') 
             print("Room Type- Standard")
-            r="Standard"
+            room_type="Standard"
             price.append(4000)
             p=4000
             print("Price- 4000")
             bill=(days+1)*p
-        elif ch==2:
+        elif choice==2:
             room.append('Standard Plus') 
             print("Room Type-Standard Plus ")
             price.append(4500)
             print("Price- 4500")
-            r="Standard Plus"
+            room_type="Standard Plus"
             p=4500
             bill=(days+1)*p
-        elif ch==3:
+        elif choice==3:
             room.append('Suites')
             print("Room Type- Suites")
             price.append(5000)
             print("Price- 5000")
-            r='Suites'
+            room_type='Suites'
             p=5000
             bill=(days+1)*p
-        elif ch==4:
+        elif choice==4:
             room.append('Cottages')
             print("Room Type- Cottages")
             price.append(5500)
             print("Price- 5500")
-            r="Cottages"
+            room_type="Cottages"
             p=5500
             bill=(days+1)*p
         else:
@@ -222,16 +217,16 @@ def booking():
         customer_id = random.randrange(60)+10
         print("")
         roomno.append(room_no)
-        custid.append(customer_id)
+        customer_Id.append(customer_id)
         i=i+1
-        hotel.extend([n,p1,a,indate,outdate,r,p,room_no,customer_id,days+1])
+        hotel.extend([n,p1,a,indate,outdate,room_type,p,room_no,customer_id,days+1])
         csvfile.writerow(hotel)
         print("\t\t\t---ROOM BOOKED SUCCESSFULLY---\n")
         print("Room No. - ",room_no)
         print("Customer Id - ",customer_id)
         print("Successfully Saved into Our Database")
         data=str(hotel)
-        sql="insert into booking(Name,Phone_Number,Email,Check_In,Check_Out,Room_Type,Price,Room_Number,Customer_id,Days)values('{}',{},'{}','{}','{}','{}',{},{},{},{})".format(n,str(p1),a,str(indate),str(outdate),r,p,room_no,customer_id,days+1)
+        sql="insert into booking(Name,Phone_Number,Email,Check_In,Check_Out,Room_Type,Price,Room_Number,Customer_id,Days)values('{}',{},'{}','{}','{}','{}',{},{},{},{})".format(n,str(p1),a,str(indate),str(outdate),room_type,p,room_no,customer_id,days+1)
         cursor.execute(sql)
         service_charge=0
         services.extend([n,customer_id,service_charge,bill])
@@ -400,75 +395,75 @@ def restaurant():
                         print(" 35.Mirinda(500 ml)............60.00	 70.Blueberry Cheese Lava Cake...130.00")
                         print("------------------------------------	 -----------------------------------")
                         print("Press 0 -to end ")
-                        ch=1
+                        choice=1
                                 
-                        while(ch!=0):
-                            ch=int(input(" -> ")) 
+                        while(choice!=0):
+                            choice=int(input(" -> ")) 
                                                 
                             # if-elif-conditions to assign item 
                             # prices listed in menu card 
                                                 
-                            if ch==1 or ch==5 or ch==6:
+                            if choice==1 or choice==5 or choice==6:
                                 cost=25
                                 counter=counter+cost
-                            elif ch==2 or ch==7 or ch==25:
+                            elif choice==2 or choice==7 or choice==25:
                                 cost=30
                                 counter=counter+cost
-                            elif ch==3:
+                            elif choice==3:
                                 cost=10
                                 counter=counter+cost
-                            elif ch==4:
+                            elif choice==4:
                                 cost=20
                                 counter=counter+cost
-                            elif ch==8 or ch==56:
+                            elif choice==8 or choice==56:
                                 cost=45
                                 counter=counter+cost
-                            elif (ch<=11 and ch>=9) or ch==50 or ch==51:
+                            elif (choice<=11 and choice>=9) or choice==50 or choice==51:
                                 cost=90
                                 counter=counter+cost
-                            elif (ch<=16 and ch>=14) or ch==12 or ch==52 or ch==58 or ch==59:
+                            elif (choice<=16 and choice>=14) or choice==12 or choice==52 or choice==58 or choice==59:
                                 cost=120
                                 counter=counter+cost
-                            elif (ch<=20 and ch>=18) or ch==24:
+                            elif (choice<=20 and choice>=18) or choice==24:
                                 cost=55
                                 counter=counter+cost
-                            elif ch==21 or ch==61:
+                            elif choice==21 or choice==61:
                                 cost=70
                                 counter=counter+cost
-                            elif ch==17 or ch==33 or ch==36:
+                            elif choice==17 or choice==33 or choice==36:
                                 cost=50
                                 counter=counter+cost
-                            elif ch==22 or ch==39 or ch==45 or ch==46:
+                            elif choice==22 or choice==39 or choice==45 or choice==46:
                                 cost=80
                                 counter=counter+cost
-                            elif ch==26 or ch==37 or ch==41:
+                            elif choice==26 or choice==37 or choice==41:
                                 cost=40
                                 counter=counter+cost
-                            elif ch==27 or ch==55 or ch==60:
+                            elif choice==27 or choice==55 or choice==60:
                                 cost=140
                                 counter=counter+cost
-                            elif ch==28 or ch==30:
+                            elif choice==28 or choice==30:
                                 cost=160
                                 counter=counter+cost
-                            elif ch==31 or ch==44:
+                            elif choice==31 or choice==44:
                                 cost=150
                                 counter=counter+cost
-                            elif ch==32 or ch==34 or ch==35 or ch==42 or(ch>=62 and ch<=66):
+                            elif choice==32 or choice==34 or choice==35 or choice==42 or(choice>=62 and choice<=66):
                                 cost=60
                                 counter=counter+cost
-                            elif ch==38 or ch==57:
+                            elif choice==38 or choice==57:
                                 cost=65
                                 counter=counter+cost
-                            elif ch==53:
+                            elif choice==53:
                                 cost=165
                                 counter=counter+cost
-                            elif ch==13 or ch==23 or ch==40 or ch==43 or (ch>=47 and ch<=49) or ch==68 or ch==67:
+                            elif choice==13 or choice==23 or choice==40 or choice==43 or (choice>=47 and choice<=49) or choice==68 or choice==67:
                                 cost=100
                                 counter=counter+cost
-                            elif ch==29 or ch==54 or ch==70 or ch==69:
+                            elif choice==29 or choice==54 or choice==70 or choice==69:
                                 cost=130
                                 counter=counter+cost
-                            elif ch==0:
+                            elif choice==0:
                                 pass
                             else:
                                 print("Wrong Choice..!!")
@@ -530,8 +525,8 @@ def payment():
                         row1=cursor.fetchall()
                         print("Your Total bill is:",hotel_service+room_chrg)
                         if row1==[('NO',)]:
-                            ch=input("Do you wish to make your payment now? y-yes,or any other character to exit-->")
-                            if ch=='y' or ch=='Y':
+                            choice=input("Do you wish to make your payment now? y-yes,or any other character to exit-->")
+                            if choice=='y' or choice=='Y':
                                 print("Enter mode of payment")
                                 print(" 1- Credit/Debit Card")
                                 print(" 2- Paytm/PhonePe")
