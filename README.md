@@ -28,7 +28,7 @@ For table booking:
 create table booking(
     Name Varchar(20),
     Phone_Number varchar(10),
-    Email varchar(15),
+    Email varchar(30),
     Check_In date,
     Check_Out date,
     Room_Type varchar(15),
