@@ -1,6 +1,7 @@
 # Project Failing Sometimes, Fixing
 <hr>
-# Hotel Management System
+
+## Hotel Management System
 
 This is a basic Hotel  Management System Project which uses the concepts of MySQL and File Handling. It stores the data in sql tables and csv files.
 
