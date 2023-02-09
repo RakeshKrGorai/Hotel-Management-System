@@ -47,5 +47,6 @@ create table service(
 - Now run "Hotel Management System.py". It should be working well.
 <hr>
 PS- Deleting record might give error if you try to delete data in same terminal where you booked your room. It will work if you close and re run the program and enter customer id for the customer you want to delete.
-
+<br>
+I have found a fix to that, will push that update later. 
 <hr>
